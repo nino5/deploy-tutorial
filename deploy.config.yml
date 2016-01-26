@@ -1,0 +1,24 @@
+http:
+  port: 1337
+
+projects:
+  deploy-tutorial:
+    branches: master
+
+    vars:
+      project.local: /Users/Nino/Downloads/deploy-tutorial
+      project.image: bobi/whalesay
+
+    repo:
+      github/nino5/deploy-tutorial: ${project.local}
+
+    image:
+      image: ${project.image}:{branch}
+      path: ${project.local}
+
+    pod:
+      path: ${project.local}
+      file: whalesay.pod.yml
+      vars:
+        image: ${project.image}
+        branch: ${branch}
